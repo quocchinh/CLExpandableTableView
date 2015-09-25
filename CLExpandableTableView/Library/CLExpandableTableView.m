@@ -64,7 +64,6 @@ UITableViewDelegate
 - (void)setupTableView
 {
     self.tableView = [[UITableView alloc] init];
-    self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kHeaderViewIdentifier];
@@ -84,6 +83,17 @@ UITableViewDelegate
 - (void)setInitialSectionState
 {
     self.sectionStateDict = [NSMutableDictionary new];
+}
+
+
+
+#pragma mark -
+#pragma mark - Properties
+
+- (void)setDataSource:(id<CLExpandableTableViewDataSource>)dataSource
+{
+    _dataSource = dataSource;
+    self.tableView.dataSource = self;
 }
 
 
@@ -224,7 +234,7 @@ UITableViewDelegate
             break;
             
         case SectionStateExpanded:
-            return 2;
+            return [self.dataSource expandableTableView:self numberOfRowsInSection:section];
             break;
             
         default:
@@ -261,6 +271,11 @@ UITableViewDelegate
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return [self.dataSource expandableTableView:self heightForHeaderInSection:section];
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kHeaderViewIdentifier];
@@ -276,6 +291,7 @@ UITableViewDelegate
     
     // Add invisible button
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.translatesAutoresizingMaskIntoConstraints = NO;
     btn.tag = section;
     [btn addTarget:self action:@selector(sectionHeaderTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [headerView.contentView addSubview:btn];

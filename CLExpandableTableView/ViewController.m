@@ -7,8 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "CLExpandableTableView.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@interface ViewController () <CLExpandableTableViewDataSource, CLExpandableTableViewDelegate>
+
+@property (nonatomic,weak) IBOutlet CLExpandableTableView *expandableTableView;
 
 @end
 
@@ -25,27 +29,32 @@
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)numberOfSectionsInExpandableTableView:(CLExpandableTableView *)tableView
 {
-    return 0;
+    return 6;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)expandableTableView:(CLExpandableTableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 100;
+}
+
+- (UIView *)expandableTableView:(CLExpandableTableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *v = [[UIView alloc] init];
+    v.backgroundColor = section % 2 == 0 ? [UIColor redColor] : [UIColor blueColor];
+    return v;
+}
+
+- (NSInteger)expandableTableView:(CLExpandableTableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+
+- (UITableViewCell *)expandableTableView:(CLExpandableTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [[UITableViewCell alloc] init];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 3;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor blackColor];
-    
-    return view;
-}
 
 @end
