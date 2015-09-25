@@ -22,7 +22,7 @@
 
 
 @optional
-- (CLExpandableLoadingTableViewCell *)expandableTableView:(CLExpandableTableView *)tableView loadingCellForSection:(NSInteger)section;
+- (CLExpandableLoadingTableViewCell *)loadingCellForExpandableTableView:(CLExpandableTableView *)tableView;
 
 
 @optional

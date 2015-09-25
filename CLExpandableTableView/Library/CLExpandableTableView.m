@@ -33,7 +33,9 @@ UITableViewDelegate
 
 @end
 
-@implementation CLExpandableTableView
+@implementation CLExpandableTableView {
+    NSString *_loadingCellReuseIdentifier;
+}
 
 #pragma mark -
 #pragma mark - Init
@@ -60,6 +62,7 @@ UITableViewDelegate
 {
     [self setupTableView];
     [self setInitialSectionState];
+    [self setDefaultLoadingCellReuseIdentifier];
 }
 
 - (void)setupTableView
@@ -86,6 +89,11 @@ UITableViewDelegate
     self.sectionStateDict = [NSMutableDictionary new];
 }
 
+- (void)setDefaultLoadingCellReuseIdentifier
+{
+    _loadingCellReuseIdentifier = [CLExpandableLoadingTableViewCell reuseIdentifier];
+}
+
 
 
 #pragma mark -
@@ -94,7 +102,14 @@ UITableViewDelegate
 - (void)setDataSource:(id<CLExpandableTableViewDataSource>)dataSource
 {
     _dataSource = dataSource;
+    if ([dataSource respondsToSelector:@selector(loadingCellForExpandableTableView:)]) [self grabLoadingCellReuseIdentifier:dataSource];
     self.tableView.dataSource = self;
+}
+
+- (void)grabLoadingCellReuseIdentifier:(id<CLExpandableTableViewDataSource>)dataSource
+{
+    CLExpandableLoadingTableViewCell *cell = [self.dataSource loadingCellForExpandableTableView:self];
+    _loadingCellReuseIdentifier = cell.reuseIdentifier;
 }
 
 
@@ -255,17 +270,15 @@ UITableViewDelegate
     
     switch (state) {
         case SectionStateLoading: {
-            CLExpandableLoadingTableViewCell *cell;
+            CLExpandableLoadingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_loadingCellReuseIdentifier];
             
-            if ([self.dataSource respondsToSelector:@selector(expandableTableView:loadingCellForSection:)]) {
-                return [self.dataSource expandableTableView:self loadingCellForSection:indexPath.section];
-            } else {
-                cell = [tableView dequeueReusableCellWithIdentifier:[CLExpandableLoadingTableViewCell reuseIdentifier]];
-                if (!cell) {
-                    NSLog(@"Init new default loading cell");
+            if (!cell) {
+                NSLog(@"Init new loading cell");
+                if ([self.dataSource respondsToSelector:@selector(loadingCellForExpandableTableView:)]) {
+                    cell = [self.dataSource loadingCellForExpandableTableView:self];
+                } else {
                     cell = [CLExpandableLoadingTableViewCell loadFromXib];
                 }
-                
             }
             
             [cell.activityIndicatorView startAnimating];
