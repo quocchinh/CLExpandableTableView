@@ -56,5 +56,10 @@
     return [[UITableViewCell alloc] init];
 }
 
+-(BOOL)expandableTableView:(CLExpandableTableView *)tableView willExpandSection:(NSInteger)section
+{
+    return NO;
+}
+
 
 @end

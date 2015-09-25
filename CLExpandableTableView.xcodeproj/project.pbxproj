@@ -14,6 +14,8 @@
 		906FD6481BB2812100156A01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 906FD6471BB2812100156A01 /* Assets.xcassets */; };
 		906FD64B1BB2812100156A01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 906FD6491BB2812100156A01 /* LaunchScreen.storyboard */; };
 		906FD6551BB297B000156A01 /* CLExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 906FD6541BB297B000156A01 /* CLExpandableTableView.m */; settings = {ASSET_TAGS = (); }; };
+		906FD6581BB5581D00156A01 /* CLExpandableLoadingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 906FD6571BB5581D00156A01 /* CLExpandableLoadingTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		906FD65A1BB558F100156A01 /* CLExpandableLoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 906FD6591BB558F100156A01 /* CLExpandableLoadingTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,9 @@
 		906FD64C1BB2812100156A01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		906FD6531BB297B000156A01 /* CLExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLExpandableTableView.h; sourceTree = "<group>"; };
 		906FD6541BB297B000156A01 /* CLExpandableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLExpandableTableView.m; sourceTree = "<group>"; };
+		906FD6561BB5581D00156A01 /* CLExpandableLoadingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLExpandableLoadingTableViewCell.h; sourceTree = "<group>"; };
+		906FD6571BB5581D00156A01 /* CLExpandableLoadingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLExpandableLoadingTableViewCell.m; sourceTree = "<group>"; };
+		906FD6591BB558F100156A01 /* CLExpandableLoadingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLExpandableLoadingTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +93,9 @@
 			children = (
 				906FD6531BB297B000156A01 /* CLExpandableTableView.h */,
 				906FD6541BB297B000156A01 /* CLExpandableTableView.m */,
+				906FD6561BB5581D00156A01 /* CLExpandableLoadingTableViewCell.h */,
+				906FD6571BB5581D00156A01 /* CLExpandableLoadingTableViewCell.m */,
+				906FD6591BB558F100156A01 /* CLExpandableLoadingTableViewCell.xib */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -150,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				906FD64B1BB2812100156A01 /* LaunchScreen.storyboard in Resources */,
+				906FD65A1BB558F100156A01 /* CLExpandableLoadingTableViewCell.xib in Resources */,
 				906FD6481BB2812100156A01 /* Assets.xcassets in Resources */,
 				906FD6461BB2812100156A01 /* Main.storyboard in Resources */,
 			);
@@ -164,6 +173,7 @@
 			files = (
 				906FD6551BB297B000156A01 /* CLExpandableTableView.m in Sources */,
 				906FD6431BB2812100156A01 /* ViewController.m in Sources */,
+				906FD6581BB5581D00156A01 /* CLExpandableLoadingTableViewCell.m in Sources */,
 				906FD6401BB2812100156A01 /* AppDelegate.m in Sources */,
 				906FD63D1BB2812100156A01 /* main.m in Sources */,
 			);

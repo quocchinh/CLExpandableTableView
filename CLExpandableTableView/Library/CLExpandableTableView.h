@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class CLExpandableTableView;
+@class CLExpandableLoadingTableViewCell;
 
 @protocol CLExpandableTableViewDataSource <NSObject>
 
@@ -21,7 +22,7 @@
 
 
 @optional
-- (UITableViewCell *)expandableTableView:(CLExpandableTableView *)tableView loadingCellForSection:(NSInteger)section;
+- (CLExpandableLoadingTableViewCell *)expandableTableView:(CLExpandableTableView *)tableView loadingCellForSection:(NSInteger)section;
 
 
 @optional

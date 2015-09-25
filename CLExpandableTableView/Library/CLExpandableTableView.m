@@ -7,6 +7,7 @@
 //
 
 #import "CLExpandableTableView.h"
+#import "CLExpandableLoadingTableViewCell.h"
 
 static NSString* const kHeaderViewIdentifier = @"HeaderViewIdentifier";
 
@@ -258,7 +259,7 @@ UITableViewDelegate
                 return [self.dataSource expandableTableView:self loadingCellForSection:indexPath.section];
             } else {
                 // TODO: default loading cell
-                return [[UITableViewCell alloc] init];
+                return [CLExpandableLoadingTableViewCell loadFromXib];
             }
             break;
             
