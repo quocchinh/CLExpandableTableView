@@ -8,6 +8,9 @@
 
 #import "CLExpandableTableView.h"
 
+static NSString* const kHeaderViewIdentifier = @"HeaderViewIdentifier";
+
+
 typedef NS_ENUM(NSInteger, SectionState) {
     SectionStateCollapsed,
     SectionStateLoading,
@@ -63,6 +66,8 @@ UITableViewDelegate
     self.tableView = [[UITableView alloc] init];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kHeaderViewIdentifier];
     
     [self positionTableView];
 }
@@ -170,7 +175,17 @@ UITableViewDelegate
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [self.dataSource expandableTableView:self viewForHeaderInSection:section];
+    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kHeaderViewIdentifier];
+    [[headerView.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    UIView *viewFromDataSource = [self.dataSource expandableTableView:self viewForHeaderInSection:section];
+    viewFromDataSource.translatesAutoresizingMaskIntoConstraints = NO;
+    [headerView.contentView addSubview:viewFromDataSource];
+    
+    [headerView.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[viewFromDataSource]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(viewFromDataSource)]];
+    [headerView.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[viewFromDataSource]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(viewFromDataSource)]];
+    
+    return headerView;
 }
 
 
