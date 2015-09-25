@@ -20,6 +20,10 @@
 
 
 @optional
+- (UITableViewCell *)expandableTableView:(CLExpandableTableView *)tableView loadingCellForSection:(NSInteger)section;
+
+
+@optional
 
 @end
 

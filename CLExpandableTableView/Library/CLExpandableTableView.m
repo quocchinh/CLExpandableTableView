@@ -147,7 +147,25 @@ UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.dataSource expandableTableView:self cellForRowAtIndexPath:indexPath];
+    SectionState state = [self sectionState:indexPath.section];
+    
+    switch (state) {
+        case SectionStateLoading:
+            if ([self.dataSource respondsToSelector:@selector(expandableTableView:loadingCellForSection:)]) {
+                return [self.dataSource expandableTableView:self loadingCellForSection:indexPath.section];
+            } else {
+                // TODO: default loading cell
+                return [[UITableViewCell alloc] init];
+            }
+            break;
+            
+        case SectionStateExpanded:
+            return [self.dataSource expandableTableView:self cellForRowAtIndexPath:indexPath];
+            break;
+        
+        default:
+            return [[UITableViewCell alloc] init];
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
