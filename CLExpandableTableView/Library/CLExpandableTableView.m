@@ -24,6 +24,9 @@ UITableViewDelegate
 
 @property (nonatomic,strong) UITableView *tableView;
 
+// Key = @(section id) , value = @(SectionState)
+@property (nonatomic,strong) NSMutableDictionary *sectionStateDict;
+
 @end
 
 @implementation CLExpandableTableView
@@ -52,6 +55,7 @@ UITableViewDelegate
 - (void)commonInit
 {
     [self setupTableView];
+    [self setInitialSectionState];
 }
 
 - (void)setupTableView
@@ -72,6 +76,11 @@ UITableViewDelegate
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[tableView]|" options:0 metrics:nil views:@{@"tableView":self.tableView}]];
 }
 
+- (void)setInitialSectionState
+{
+    self.sectionStateDict = [NSMutableDictionary new];
+}
+
 
 
 #pragma mark -
@@ -86,10 +95,48 @@ UITableViewDelegate
 
 
 #pragma mark -
+#pragma mark - Private Methods
+
+- (SectionState)sectionState:(NSInteger)section
+{
+    if (self.sectionStateDict[@(section)]) {
+        return [self.sectionStateDict[@(section)] integerValue];
+    } else {
+        [self setSectionState:SectionStateCollapsed forSection:section];
+        return SectionStateCollapsed;
+    }
+}
+
+- (void)setSectionState:(SectionState)state forSection:(NSInteger)section
+{
+    [self.sectionStateDict setObject:@(state) forKey:@(section)];
+}
+
+
+
+
+
+#pragma mark -
 #pragma mark - TableView Delegate and DataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    switch ([self sectionState:section]) {
+        case SectionStateCollapsed:
+            return 0;
+            break;
+            
+        case SectionStateLoading:
+            return 1;
+            break;
+            
+        case SectionStateExpanded:
+            return 2;
+            break;
+            
+        default:
+            break;
+    }
     return 0;
 }
 
