@@ -50,6 +50,6 @@
 @property (nonatomic,weak) IBOutlet id<CLExpandableTableViewDelegate> delegate;
 
 
-- (void)refreshSection:(NSInteger)section;
+- (void)reloadSection:(NSInteger)section;
 
 @end
