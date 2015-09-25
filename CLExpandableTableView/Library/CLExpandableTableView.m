@@ -146,14 +146,30 @@ UITableViewDelegate
         expandable = [self.delegate expandableTableView:self willExpandSection:section];
     }
     
-    NSInteger numOfRowsToInsert;
     if (expandable) {
-        [self setSectionState:SectionStateExpanded forSection:section];
-        numOfRowsToInsert = [self.dataSource expandableTableView:self numberOfRowsInSection:section];
+        [self expandSection:section];
     } else {
-        [self setSectionState:SectionStateLoading forSection:section];
-        numOfRowsToInsert = 1;
+        [self showLoadingSection:section];
     }
+}
+
+- (void)expandSection:(NSInteger)section
+{
+    [self setSectionState:SectionStateExpanded forSection:section];
+    NSInteger numOfRowsToInsert = [self.dataSource expandableTableView:self numberOfRowsInSection:section];
+
+    [self.tableView beginUpdates];
+    NSArray *indexPaths = [self indexPathsForSection:section withNumberOfRows:numOfRowsToInsert];
+    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView endUpdates];
+}
+
+- (void)showLoadingSection:(NSInteger)section
+{
+    if ([self sectionState:section] == SectionStateLoading) return;
+    
+    [self setSectionState:SectionStateLoading forSection:section];
+    NSInteger numOfRowsToInsert = 1;
     
     [self.tableView beginUpdates];
     NSArray *indexPaths = [self indexPathsForSection:section withNumberOfRows:numOfRowsToInsert];
@@ -170,6 +186,11 @@ UITableViewDelegate
     
     if (!collapsable) return;
     
+    [self collapseSection:section];
+}
+
+- (void)collapseSection:(NSInteger)section
+{
     SectionState state = [self sectionState:section];
     NSInteger numOfRowsToDelete;
     if (state == SectionStateExpanded) {
