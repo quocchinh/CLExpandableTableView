@@ -117,9 +117,72 @@ UITableViewDelegate
     [self.sectionStateDict setObject:@(state) forKey:@(section)];
 }
 
+-(NSArray*) indexPathsForSection:(NSInteger)section withNumberOfRows:(NSInteger)numberOfRows {
+    NSMutableArray* indexPaths = [NSMutableArray new];
+    for (int i = 0; i < numberOfRows; i++) {
+        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:i inSection:section];
+        [indexPaths addObject:indexPath];
+    }
+    return indexPaths;
+}
+
 - (void)sectionHeaderTouchUpInside:(id)sender
 {
+    UIButton *btn = (UIButton *)sender;
+    NSInteger section = btn.tag;
+    SectionState state = [self sectionState:section];
     
+    if (state == SectionStateCollapsed) {
+        [self attemptToExpandSection:section];
+    } else {
+        [self attemptToCollapseSection:section];
+    }
+}
+
+- (void)attemptToExpandSection:(NSInteger)section
+{
+    BOOL expandable = YES;
+    if ([self.delegate respondsToSelector:@selector(expandableTableView:willExpandSection:)]) {
+        expandable = [self.delegate expandableTableView:self willExpandSection:section];
+    }
+    
+    NSInteger numOfRowsToInsert;
+    if (expandable) {
+        [self setSectionState:SectionStateExpanded forSection:section];
+        numOfRowsToInsert = [self.dataSource expandableTableView:self numberOfRowsInSection:section];
+    } else {
+        [self setSectionState:SectionStateLoading forSection:section];
+        numOfRowsToInsert = 1;
+    }
+    
+    [self.tableView beginUpdates];
+    NSArray *indexPaths = [self indexPathsForSection:section withNumberOfRows:numOfRowsToInsert];
+    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView endUpdates];
+}
+
+- (void)attemptToCollapseSection:(NSInteger)section
+{
+    BOOL collapsable = YES;
+    if ([self.delegate respondsToSelector:@selector(expandableTableView:willCollapseSection:)]) {
+        collapsable = [self.delegate expandableTableView:self willCollapseSection:section];
+    }
+    
+    if (!collapsable) return;
+    
+    SectionState state = [self sectionState:section];
+    NSInteger numOfRowsToDelete;
+    if (state == SectionStateExpanded) {
+        numOfRowsToDelete = [self.dataSource expandableTableView:self numberOfRowsInSection:section];
+    } else {
+        numOfRowsToDelete = 1;
+    }
+    [self setSectionState:SectionStateCollapsed forSection:section];
+    
+    [self.tableView beginUpdates];
+    NSArray *indexPaths = [self indexPathsForSection:section withNumberOfRows:numOfRowsToDelete];
+    [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView endUpdates];
 }
 
 
