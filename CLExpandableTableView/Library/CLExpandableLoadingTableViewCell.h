@@ -13,5 +13,6 @@
 @property (nonatomic,strong) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 
 + (instancetype)loadFromXib;
++ (NSString *)reuseIdentifier;
 
 @end

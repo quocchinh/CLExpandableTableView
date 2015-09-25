@@ -254,14 +254,24 @@ UITableViewDelegate
     SectionState state = [self sectionState:indexPath.section];
     
     switch (state) {
-        case SectionStateLoading:
+        case SectionStateLoading: {
+            CLExpandableLoadingTableViewCell *cell;
+            
             if ([self.dataSource respondsToSelector:@selector(expandableTableView:loadingCellForSection:)]) {
                 return [self.dataSource expandableTableView:self loadingCellForSection:indexPath.section];
             } else {
-                // TODO: default loading cell
-                return [CLExpandableLoadingTableViewCell loadFromXib];
+                cell = [tableView dequeueReusableCellWithIdentifier:[CLExpandableLoadingTableViewCell reuseIdentifier]];
+                if (!cell) {
+                    NSLog(@"Init new default loading cell");
+                    cell = [CLExpandableLoadingTableViewCell loadFromXib];
+                }
+                
             }
+            
+            [cell.activityIndicatorView startAnimating];
+            return cell;
             break;
+        }
             
         case SectionStateExpanded:
             return [self.dataSource expandableTableView:self cellForRowAtIndexPath:indexPath];

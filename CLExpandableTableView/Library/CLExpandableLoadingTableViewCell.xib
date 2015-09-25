@@ -7,26 +7,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CLExpandableLoadingTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jnl-wQ-XFU">
-                    <rect key="frame" x="290" y="35" width="20" height="20"/>
-                </activityIndicatorView>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="jnl-wQ-XFU" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="5P0-ZA-DSC"/>
-                <constraint firstItem="jnl-wQ-XFU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="v1E-96-Xus"/>
-            </constraints>
-            <nil key="simulatedStatusBarMetrics"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CLExpandableLoadingTableViewCell" rowHeight="51" id="Epy-3w-yj1" customClass="CLExpandableLoadingTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="490" height="51"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Epy-3w-yj1" id="G2A-TL-aGT">
+                <rect key="frame" x="0.0" y="0.0" width="490" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5fU-NY-UPb">
+                        <rect key="frame" x="235" y="15" width="20" height="20"/>
+                        <color key="color" red="0.99607843139999996" green="0.25882352939999997" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </activityIndicatorView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="5fU-NY-UPb" firstAttribute="centerY" secondItem="G2A-TL-aGT" secondAttribute="centerY" id="9xi-mU-Bnb"/>
+                    <constraint firstItem="5fU-NY-UPb" firstAttribute="centerX" secondItem="G2A-TL-aGT" secondAttribute="centerX" id="HqL-SP-mq6"/>
+                </constraints>
+            </tableViewCellContentView>
             <connections>
-                <outlet property="activityIndicatorView" destination="jnl-wQ-XFU" id="G1Q-SH-jzd"/>
+                <outlet property="activityIndicatorView" destination="5fU-NY-UPb" id="vLi-my-AKp"/>
             </connections>
-            <point key="canvasLocation" x="493" y="192"/>
-        </view>
+            <point key="canvasLocation" x="548" y="292.5"/>
+        </tableViewCell>
     </objects>
 </document>

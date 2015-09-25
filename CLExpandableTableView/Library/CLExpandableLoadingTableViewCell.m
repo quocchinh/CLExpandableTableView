@@ -17,6 +17,11 @@
     return cell;
 }
 
++ (NSString *)reuseIdentifier
+{
+    return NSStringFromClass([self class]);
+}
+
 - (void)awakeFromNib {
     // Initialization code
 }
