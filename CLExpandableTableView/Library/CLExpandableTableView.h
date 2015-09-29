@@ -20,7 +20,7 @@
 - (NSInteger)expandableTableView:(CLExpandableTableView *)tableView numberOfRowsInSection:(NSInteger)section;
 
 
-// For this we need to pass in the private tableView so that data source can ultilize tableview's dequeuereusablecell 
+// For this we need to pass in the private tableView so that data source can ultilize tableview's dequeuereusablecell
 - (UITableViewCell *)expandableTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 
