@@ -7,18 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		905283FF1BBA3E8900D0C8FC /* Launch Screen 2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 905283FD1BBA3E8900D0C8FC /* Launch Screen 2.xib */; };
 		906FD63D1BB2812100156A01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 906FD63C1BB2812100156A01 /* main.m */; };
 		906FD6401BB2812100156A01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 906FD63F1BB2812100156A01 /* AppDelegate.m */; };
 		906FD6431BB2812100156A01 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 906FD6421BB2812100156A01 /* ViewController.m */; };
 		906FD6461BB2812100156A01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 906FD6441BB2812100156A01 /* Main.storyboard */; };
 		906FD6481BB2812100156A01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 906FD6471BB2812100156A01 /* Assets.xcassets */; };
-		906FD64B1BB2812100156A01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 906FD6491BB2812100156A01 /* LaunchScreen.storyboard */; };
-		906FD6551BB297B000156A01 /* CLExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 906FD6541BB297B000156A01 /* CLExpandableTableView.m */; settings = {ASSET_TAGS = (); }; };
-		906FD6581BB5581D00156A01 /* CLExpandableLoadingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 906FD6571BB5581D00156A01 /* CLExpandableLoadingTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		906FD65A1BB558F100156A01 /* CLExpandableLoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 906FD6591BB558F100156A01 /* CLExpandableLoadingTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		906FD6551BB297B000156A01 /* CLExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 906FD6541BB297B000156A01 /* CLExpandableTableView.m */; };
+		906FD6581BB5581D00156A01 /* CLExpandableLoadingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 906FD6571BB5581D00156A01 /* CLExpandableLoadingTableViewCell.m */; };
+		906FD65A1BB558F100156A01 /* CLExpandableLoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 906FD6591BB558F100156A01 /* CLExpandableLoadingTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		905283FE1BBA3E8900D0C8FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "CLExpandableTableView/Base.lproj/Launch Screen 2.xib"; sourceTree = "<group>"; };
 		906FD6381BB2812100156A01 /* CLExpandableTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLExpandableTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		906FD63C1BB2812100156A01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		906FD63E1BB2812100156A01 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -27,7 +28,6 @@
 		906FD6421BB2812100156A01 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		906FD6451BB2812100156A01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		906FD6471BB2812100156A01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		906FD64A1BB2812100156A01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		906FD64C1BB2812100156A01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		906FD6531BB297B000156A01 /* CLExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLExpandableTableView.h; sourceTree = "<group>"; };
 		906FD6541BB297B000156A01 /* CLExpandableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLExpandableTableView.m; sourceTree = "<group>"; };
@@ -50,6 +50,7 @@
 		906FD62F1BB2812100156A01 = {
 			isa = PBXGroup;
 			children = (
+				905283FD1BBA3E8900D0C8FC /* Launch Screen 2.xib */,
 				906FD63A1BB2812100156A01 /* CLExpandableTableView */,
 				906FD6391BB2812100156A01 /* Products */,
 			);
@@ -73,7 +74,6 @@
 				906FD6421BB2812100156A01 /* ViewController.m */,
 				906FD6441BB2812100156A01 /* Main.storyboard */,
 				906FD6471BB2812100156A01 /* Assets.xcassets */,
-				906FD6491BB2812100156A01 /* LaunchScreen.storyboard */,
 				906FD64C1BB2812100156A01 /* Info.plist */,
 				906FD63B1BB2812100156A01 /* Supporting Files */,
 			);
@@ -157,8 +157,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				906FD64B1BB2812100156A01 /* LaunchScreen.storyboard in Resources */,
 				906FD65A1BB558F100156A01 /* CLExpandableLoadingTableViewCell.xib in Resources */,
+				905283FF1BBA3E8900D0C8FC /* Launch Screen 2.xib in Resources */,
 				906FD6481BB2812100156A01 /* Assets.xcassets in Resources */,
 				906FD6461BB2812100156A01 /* Main.storyboard in Resources */,
 			);
@@ -182,20 +182,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		905283FD1BBA3E8900D0C8FC /* Launch Screen 2.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				905283FE1BBA3E8900D0C8FC /* Base */,
+			);
+			name = "Launch Screen 2.xib";
+			sourceTree = "<group>";
+		};
 		906FD6441BB2812100156A01 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				906FD6451BB2812100156A01 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		906FD6491BB2812100156A01 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				906FD64A1BB2812100156A01 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -324,6 +324,7 @@
 				906FD6511BB2812100156A01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

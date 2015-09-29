@@ -287,7 +287,7 @@ UITableViewDelegate
         }
             
         case SectionStateExpanded:
-            return [self.dataSource expandableTableView:self cellForRowAtIndexPath:indexPath];
+            return [self.dataSource expandableTableView:tableView cellForRowAtIndexPath:indexPath];
             break;
         
         default:
