@@ -16,16 +16,15 @@
 - (NSInteger)numberOfSectionsInExpandableTableView:(CLExpandableTableView *)tableView;
 - (CGFloat)expandableTableView:(CLExpandableTableView *)tableView heightForHeaderInSection:(NSInteger)section;
 - (UIView *)expandableTableView:(CLExpandableTableView *)tableView viewForHeaderInSection:(NSInteger)section;
-
 - (NSInteger)expandableTableView:(CLExpandableTableView *)tableView numberOfRowsInSection:(NSInteger)section;
 
 
 // For this we need to pass in the private tableView so that data source can ultilize tableview's dequeuereusablecell
-- (UITableViewCell *)expandableTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 
 @optional
-- (CLExpandableLoadingTableViewCell *)expandableTableView:(UITableView *)tableView loadingCellForSection:(NSInteger)section;
+- (CLExpandableLoadingTableViewCell *)tableView:(UITableView *)tableView loadingCellForSection:(NSInteger)section;
 
 
 @optional
@@ -44,6 +43,9 @@
 // Easy, collapse it, returns NO if dont allow collapsing. But really, who does that ?
 - (BOOL)expandableTableView:(CLExpandableTableView *)tableView willCollapseSection:(NSInteger)section;
 
+
+- (void)expandableTableView:(CLExpandableTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 
@@ -56,5 +58,6 @@
 
 
 - (void)collapseAndExpandSection:(NSInteger)section;
+- (void)setSectionSpacing:(CGFloat)spacing;
 
 @end

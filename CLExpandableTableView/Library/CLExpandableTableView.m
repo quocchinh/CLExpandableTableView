@@ -10,6 +10,7 @@
 #import "CLExpandableLoadingTableViewCell.h"
 
 static NSString* const kHeaderViewIdentifier = @"HeaderViewIdentifier";
+static const CGFloat kDefaultSectionSpacing = 20.0;
 
 
 typedef NS_ENUM(NSInteger, SectionState) {
@@ -70,6 +71,8 @@ UITableViewDelegate
     
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kHeaderViewIdentifier];
     
+    self.tableView.sectionFooterHeight = kDefaultSectionSpacing;
+    
     [self positionTableView];
 }
 
@@ -109,7 +112,10 @@ UITableViewDelegate
     [self attemptToExpandSection:section];
 }
 
-
+- (void)setSectionSpacing:(CGFloat)spacing
+{
+    self.tableView.sectionFooterHeight = spacing;
+}
 
 
 #pragma mark -
@@ -259,8 +265,8 @@ UITableViewDelegate
             
             CLExpandableLoadingTableViewCell *cell;
             
-            if ([self.dataSource respondsToSelector:@selector(expandableTableView:loadingCellForSection:)]) {
-                cell = [self.dataSource expandableTableView:tableView loadingCellForSection:indexPath.section];
+            if ([self.dataSource respondsToSelector:@selector(tableView:loadingCellForSection:)]) {
+                cell = [self.dataSource tableView:tableView loadingCellForSection:indexPath.section];
             } else {
                 cell = [tableView dequeueReusableCellWithIdentifier:[CLExpandableLoadingTableViewCell reuseIdentifier]];
                 if (!cell) {
@@ -275,7 +281,7 @@ UITableViewDelegate
         }
             
         case SectionStateExpanded:
-            return [self.dataSource expandableTableView:tableView cellForRowAtIndexPath:indexPath];
+            return [self.dataSource tableView:tableView cellForRowAtIndexPath:indexPath];
             break;
         
         default:
@@ -312,6 +318,18 @@ UITableViewDelegate
     [headerView.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[btn]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btn)]];
     
     return headerView;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [[UIView alloc] init];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.delegate respondsToSelector:@selector(expandableTableView:didSelectRowAtIndexPath:)]) {
+        [self.delegate expandableTableView:self didSelectRowAtIndexPath:indexPath];
+    }
 }
 
 

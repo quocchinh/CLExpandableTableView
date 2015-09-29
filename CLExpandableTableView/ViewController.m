@@ -55,14 +55,18 @@
     return 4;
 }
 
-- (UITableViewCell *)expandableTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[UITableViewCell alloc] init];
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    return cell;
 }
 
 -(BOOL)expandableTableView:(CLExpandableTableView *)tableView willExpandSection:(NSInteger)section
 {
     if (!loadingDone) {
+        [tableView setSectionSpacing:50];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             loadingDone = YES;
             [tableView collapseAndExpandSection:section];
