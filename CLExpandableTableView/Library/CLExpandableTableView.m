@@ -117,7 +117,7 @@ UITableViewDelegate
 #pragma mark -
 #pragma mark - Public methods
 
-- (void)reloadSection:(NSInteger)section
+- (void)collapseAndExpandSection:(NSInteger)section
 {
     [self collapseSection:section];
     [self attemptToExpandSection:section];
