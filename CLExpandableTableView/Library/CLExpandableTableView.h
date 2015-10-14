@@ -56,8 +56,6 @@
 @property (nonatomic,weak) IBOutlet id<CLExpandableTableViewDataSource> dataSource;
 @property (nonatomic,weak) IBOutlet id<CLExpandableTableViewDelegate> delegate;
 
-- (void)registerNib:(UINib *)nib forHeaderFooterViewReuseIdentifier:(NSString *)identifier;
-
 - (void)collapseAndExpandSection:(NSInteger)section;
 - (void)setSectionSpacing:(CGFloat)spacing;
 
