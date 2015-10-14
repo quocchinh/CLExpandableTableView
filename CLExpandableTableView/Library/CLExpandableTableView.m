@@ -294,6 +294,11 @@ UITableViewDelegate
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
+{
+    return [self.dataSource expandableTableView:self heightForHeaderInSection:section];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return [self.dataSource expandableTableView:self heightForHeaderInSection:section];
