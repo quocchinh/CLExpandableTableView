@@ -106,6 +106,11 @@ UITableViewDelegate
 #pragma mark -
 #pragma mark - Public methods
 
+- (void)registerNib:(UINib *)nib forHeaderFooterViewReuseIdentifier:(NSString *)identifier
+{
+    [self.tableView registerNib:nib forHeaderFooterViewReuseIdentifier:identifier];
+}
+
 - (void)collapseAndExpandSection:(NSInteger)section
 {
     [self collapseSection:section];
