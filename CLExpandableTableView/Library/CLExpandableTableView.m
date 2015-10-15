@@ -182,12 +182,12 @@ UITableViewDelegate
 - (void)expandSection:(NSInteger)section
 {
     [self setSectionState:SectionStateExpanded forSection:section];
-//    NSInteger numOfRowsToInsert = [self.dataSource expandableTableView:self numberOfRowsInSection:section];
+    NSInteger numOfRowsToInsert = [self.dataSource expandableTableView:self numberOfRowsInSection:section];
 
-//    [self.tableView beginUpdates];
-//    NSArray *indexPaths = [self indexPathsForSection:section withNumberOfRows:numOfRowsToInsert];
-//    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
-//    [self.tableView endUpdates];
+    [self.tableView beginUpdates];
+    NSArray *indexPaths = [self indexPathsForSection:section withNumberOfRows:numOfRowsToInsert];
+    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView endUpdates];
     
 //    [CATransaction begin];
 //    [CATransaction setCompletionBlock:^{
@@ -196,8 +196,8 @@ UITableViewDelegate
 //    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
 //    [CATransaction commit];
     
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [[self.tableView headerViewForSection:section] setNeedsLayout];
+//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [[self.tableView headerViewForSection:section] setNeedsLayout];
 }
 
 - (void)showLoadingSection:(NSInteger)section
