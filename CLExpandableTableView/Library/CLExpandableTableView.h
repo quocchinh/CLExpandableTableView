@@ -14,7 +14,6 @@
 @protocol CLExpandableTableViewDataSource <NSObject>
 
 - (NSInteger)numberOfSectionsInExpandableTableView:(CLExpandableTableView *)tableView;
-- (CGFloat)expandableTableView:(CLExpandableTableView *)tableView heightForHeaderInSection:(NSInteger)section;
 - (UITableViewHeaderFooterView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
 - (NSInteger)expandableTableView:(CLExpandableTableView *)tableView numberOfRowsInSection:(NSInteger)section;
 
@@ -23,7 +22,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 
+
 @optional
+- (CGFloat)expandableTableView:(CLExpandableTableView *)tableView heightForHeaderInSection:(NSInteger)section;
+- (CGFloat)expandableTableView:(CLExpandableTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 - (CLExpandableLoadingTableViewCell *)tableView:(UITableView *)tableView loadingCellForSection:(NSInteger)section;
 
 

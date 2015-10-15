@@ -11,6 +11,8 @@
 
 static NSString* const kHeaderViewIdentifier = @"HeaderViewIdentifier";
 static const CGFloat kDefaultSectionSpacing = 20.0;
+static const CGFloat kDefaultRowHeight = 100;
+static const CGFloat kDefaultSectionHeaderHeight = 150;
 
 
 typedef NS_ENUM(NSInteger, SectionState) {
@@ -256,6 +258,15 @@ UITableViewDelegate
     return [self.dataSource numberOfSectionsInExpandableTableView:self];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.dataSource respondsToSelector:@selector(expandableTableView:heightForRowAtIndexPath:)]) {
+        return [self.dataSource expandableTableView:self heightForRowAtIndexPath:indexPath];
+    } else {
+        return kDefaultRowHeight;
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SectionState state = [self sectionState:indexPath.section];
@@ -291,12 +302,16 @@ UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
 {
-    return [self.dataSource expandableTableView:self heightForHeaderInSection:section];
+    return kDefaultSectionHeaderHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return [self.dataSource expandableTableView:self heightForHeaderInSection:section];
+    if ([self.dataSource respondsToSelector:@selector(expandableTableView:heightForHeaderInSection:)]) {
+        return [self.dataSource expandableTableView:self heightForHeaderInSection:section];
+    } else {
+        return kDefaultSectionHeaderHeight;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
