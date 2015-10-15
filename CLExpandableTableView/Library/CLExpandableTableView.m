@@ -29,7 +29,7 @@ UITableViewDataSource,
 UITableViewDelegate
 >
 
-@property (nonatomic,strong) UITableView *tableView;
+
 
 // Key = @(section id) , value = @(SectionState)
 @property (nonatomic,strong) NSMutableDictionary *sectionStateDict;
@@ -172,6 +172,7 @@ UITableViewDelegate
     } else {
         [self showLoadingSection:section];
     }
+    
 }
 
 - (void)expandSection:(NSInteger)section
@@ -316,23 +317,28 @@ UITableViewDelegate
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    SectionState state = [self sectionState:section];
+    
+    UITableViewHeaderFooterView *headerView;
+    
+    if ((state == SectionStateExpanded || state == SectionStateLoading) && [self.dataSource respondsToSelector:@selector(tableView:viewForExpandedHeaderInSection:)] ) {
+        headerView = [self.dataSource tableView:self.tableView viewForExpandedHeaderInSection:section];
+    } else
     if ([self.dataSource respondsToSelector:@selector(tableView:viewForHeaderInSection:)]) {
-        UITableViewHeaderFooterView *headerView = [self.dataSource tableView:self.tableView viewForHeaderInSection:section];
-        
-        // Add invisible button
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.translatesAutoresizingMaskIntoConstraints = NO;
-        btn.tag = section;
-        [btn addTarget:self action:@selector(sectionHeaderTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-        [headerView.contentView addSubview:btn];
-        
-        [headerView.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[btn]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btn)]];
-        [headerView.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[btn]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btn)]];
-        
-        return headerView;
+        headerView = [self.dataSource tableView:self.tableView viewForHeaderInSection:section];
     }
     
-    return [[UIView alloc] init];
+    // Add invisible button
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.translatesAutoresizingMaskIntoConstraints = NO;
+    btn.tag = section;
+    [btn addTarget:self action:@selector(sectionHeaderTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [headerView.contentView addSubview:btn];
+    
+    [headerView.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[btn]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btn)]];
+    [headerView.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[btn]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btn)]];
+    
+    return headerView;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section

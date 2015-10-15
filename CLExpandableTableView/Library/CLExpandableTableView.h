@@ -27,6 +27,10 @@
 - (CGFloat)expandableTableView:(CLExpandableTableView *)tableView heightForHeaderInSection:(NSInteger)section;
 - (CGFloat)expandableTableView:(CLExpandableTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 
+// This is optional if you want to supply different section header view when it's expanded
+- (UITableViewHeaderFooterView *)tableView:(UITableView *)tableView viewForExpandedHeaderInSection:(NSInteger)section;
+
+// If not supplied, we will use the default loading cell
 - (CLExpandableLoadingTableViewCell *)tableView:(UITableView *)tableView loadingCellForSection:(NSInteger)section;
 
 
@@ -58,6 +62,8 @@
 
 @property (nonatomic,weak) IBOutlet id<CLExpandableTableViewDataSource> dataSource;
 @property (nonatomic,weak) IBOutlet id<CLExpandableTableViewDelegate> delegate;
+
+@property (nonatomic,strong) UITableView *tableView;
 
 - (void)collapseAndExpandSection:(NSInteger)section;
 - (void)setSectionSpacing:(CGFloat)spacing;
