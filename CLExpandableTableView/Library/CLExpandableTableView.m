@@ -14,6 +14,8 @@ static const CGFloat kDefaultSectionSpacing = 20.0;
 static const CGFloat kDefaultRowHeight = 100;
 static const CGFloat kDefaultSectionHeaderHeight = 150;
 
+static const NSInteger kNumberOfVisibleSectionBelowWhenCollapsing = 8; // This one is used to fix an auto layout problem when collapsing a section causing a few sections below mis laid out
+
 
 typedef NS_ENUM(NSInteger, SectionState) {
     SectionStateCollapsed,
@@ -74,6 +76,8 @@ UITableViewDelegate
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kHeaderViewIdentifier];
     
     self.tableView.sectionFooterHeight = kDefaultSectionSpacing;
+    self.tableView.sectionHeaderHeight = kDefaultSectionHeaderHeight;
+    self.tableView.estimatedSectionHeaderHeight = kDefaultSectionHeaderHeight;
     
     [self positionTableView];
 }
@@ -178,12 +182,22 @@ UITableViewDelegate
 - (void)expandSection:(NSInteger)section
 {
     [self setSectionState:SectionStateExpanded forSection:section];
-    NSInteger numOfRowsToInsert = [self.dataSource expandableTableView:self numberOfRowsInSection:section];
+//    NSInteger numOfRowsToInsert = [self.dataSource expandableTableView:self numberOfRowsInSection:section];
 
-    [self.tableView beginUpdates];
-    NSArray *indexPaths = [self indexPathsForSection:section withNumberOfRows:numOfRowsToInsert];
-    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
-    [self.tableView endUpdates];
+//    [self.tableView beginUpdates];
+//    NSArray *indexPaths = [self indexPathsForSection:section withNumberOfRows:numOfRowsToInsert];
+//    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+//    [self.tableView endUpdates];
+    
+//    [CATransaction begin];
+//    [CATransaction setCompletionBlock:^{
+//        [[self.tableView headerViewForSection:section] setNeedsLayout];
+//    }];
+//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [CATransaction commit];
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [[self.tableView headerViewForSection:section] setNeedsLayout];
 }
 
 - (void)showLoadingSection:(NSInteger)section
@@ -214,18 +228,23 @@ UITableViewDelegate
 - (void)collapseSection:(NSInteger)section
 {
     SectionState state = [self sectionState:section];
+    [self setSectionState:SectionStateCollapsed forSection:section];
     NSInteger numOfRowsToDelete;
     if (state == SectionStateExpanded) {
         numOfRowsToDelete = [self.dataSource expandableTableView:self numberOfRowsInSection:section];
     } else {
         numOfRowsToDelete = 1;
-    }
-    [self setSectionState:SectionStateCollapsed forSection:section];
+    }   
     
     [self.tableView beginUpdates];
     NSArray *indexPaths = [self indexPathsForSection:section withNumberOfRows:numOfRowsToDelete];
     [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
     [self.tableView endUpdates];
+    
+    // This part is to fix a nasty UItableview autolayout when u collapse a section, all the section headers below won't be properly laid out
+    for (NSInteger i=section; i<section + kNumberOfVisibleSectionBelowWhenCollapsing; i++) {
+        [[self.tableView headerViewForSection:i] setNeedsLayout];
+    }
 }
 
 
@@ -345,6 +364,7 @@ UITableViewDelegate
 {
     return [[UIView alloc] init];
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
