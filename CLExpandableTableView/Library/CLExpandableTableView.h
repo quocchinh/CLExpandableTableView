@@ -14,12 +14,10 @@
 @protocol CLExpandableTableViewDataSource <NSObject>
 
 - (NSInteger)numberOfSectionsInExpandableTableView:(CLExpandableTableView *)tableView;
-- (UITableViewHeaderFooterView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
+- (UITableViewHeaderFooterView *)expandableTableView:(CLExpandableTableView *)tableView viewForHeaderInSection:(NSInteger)section;
 - (NSInteger)expandableTableView:(CLExpandableTableView *)tableView numberOfRowsInSection:(NSInteger)section;
 
-
-// For this we need to pass in the private tableView so that data source can ultilize tableview's dequeuereusablecell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UITableViewCell *)expandableTableView:(CLExpandableTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 
 
@@ -28,10 +26,10 @@
 - (CGFloat)expandableTableView:(CLExpandableTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 // This is optional if you want to supply different section header view when it's expanded
-- (UITableViewHeaderFooterView *)tableView:(UITableView *)tableView viewForExpandedHeaderInSection:(NSInteger)section;
+- (UITableViewHeaderFooterView *)expandableTableView:(CLExpandableTableView *)tableView viewForExpandedHeaderInSection:(NSInteger)section;
 
 // If not supplied, we will use the default loading cell
-- (CLExpandableLoadingTableViewCell *)tableView:(UITableView *)tableView loadingCellForSection:(NSInteger)section;
+- (CLExpandableLoadingTableViewCell *)expandableTableView:(CLExpandableTableView *)tableView loadingCellForSection:(NSInteger)section;
 
 
 @optional

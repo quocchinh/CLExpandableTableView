@@ -296,8 +296,8 @@ UITableViewDelegate
             
             CLExpandableLoadingTableViewCell *cell;
             
-            if ([self.dataSource respondsToSelector:@selector(tableView:loadingCellForSection:)]) {
-                cell = [self.dataSource tableView:tableView loadingCellForSection:indexPath.section];
+            if ([self.dataSource respondsToSelector:@selector(expandableTableView:loadingCellForSection:)]) {
+                cell = [self.dataSource expandableTableView:self loadingCellForSection:indexPath.section];
             } else {
                 cell = [tableView dequeueReusableCellWithIdentifier:[CLExpandableLoadingTableViewCell reuseIdentifier]];
                 if (!cell) {
@@ -312,7 +312,7 @@ UITableViewDelegate
         }
             
         case SectionStateExpanded:
-            return [self.dataSource tableView:tableView cellForRowAtIndexPath:indexPath];
+            return [self.dataSource expandableTableView:self cellForRowAtIndexPath:indexPath];
             break;
         
         default:
@@ -340,11 +340,11 @@ UITableViewDelegate
     
     UITableViewHeaderFooterView *headerView;
     
-    if ((state == SectionStateExpanded || state == SectionStateLoading) && [self.dataSource respondsToSelector:@selector(tableView:viewForExpandedHeaderInSection:)] ) {
-        headerView = [self.dataSource tableView:self.tableView viewForExpandedHeaderInSection:section];
+    if ((state == SectionStateExpanded || state == SectionStateLoading) && [self.dataSource respondsToSelector:@selector(expandableTableView:viewForExpandedHeaderInSection:)] ) {
+        headerView = [self.dataSource expandableTableView:self viewForExpandedHeaderInSection:section];
     } else
-    if ([self.dataSource respondsToSelector:@selector(tableView:viewForHeaderInSection:)]) {
-        headerView = [self.dataSource tableView:self.tableView viewForHeaderInSection:section];
+    if ([self.dataSource respondsToSelector:@selector(expandableTableView:viewForHeaderInSection:)]) {
+        headerView = [self.dataSource expandableTableView:self viewForHeaderInSection:section];
     }
     
     // Add invisible button
