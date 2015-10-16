@@ -186,7 +186,7 @@ UITableViewDelegate
 
     [self.tableView beginUpdates];
     NSArray *indexPaths = [self indexPathsForSection:section withNumberOfRows:numOfRowsToInsert];
-    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
     
 //    [CATransaction begin];
@@ -209,7 +209,7 @@ UITableViewDelegate
     
     [self.tableView beginUpdates];
     NSArray *indexPaths = [self indexPathsForSection:section withNumberOfRows:numOfRowsToInsert];
-    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
 }
 
@@ -238,7 +238,7 @@ UITableViewDelegate
     
     [self.tableView beginUpdates];
     NSArray *indexPaths = [self indexPathsForSection:section withNumberOfRows:numOfRowsToDelete];
-    [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
     
     // This part is to fix a nasty UItableview autolayout when u collapse a section, all the section headers below won't be properly laid out
