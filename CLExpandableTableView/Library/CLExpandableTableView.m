@@ -64,6 +64,7 @@ UITableViewDelegate
 
 - (void)commonInit
 {
+    self.backgroundColor = [UIColor clearColor];
     [self setupTableView];
     [self setInitialSectionState];
 }
@@ -72,6 +73,7 @@ UITableViewDelegate
 {
     self.tableView = [[UITableView alloc] init];
     self.tableView.delegate = self;
+    self.tableView.backgroundColor = [UIColor clearColor];
     
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kHeaderViewIdentifier];
     
