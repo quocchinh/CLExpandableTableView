@@ -78,8 +78,6 @@ UITableViewDelegate
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kHeaderViewIdentifier];
     
     self.tableView.sectionFooterHeight = kDefaultSectionSpacing;
-    self.tableView.sectionHeaderHeight = kDefaultSectionHeaderHeight;
-    self.tableView.estimatedSectionHeaderHeight = kDefaultSectionHeaderHeight;
     
     [self positionTableView];
 }
@@ -320,11 +318,6 @@ UITableViewDelegate
         default:
             return [[UITableViewCell alloc] init];
     }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
-{
-    return kDefaultSectionHeaderHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
