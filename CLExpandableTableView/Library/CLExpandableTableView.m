@@ -118,6 +118,17 @@ UITableViewDelegate
     [self attemptToExpandSection:section];
 }
 
+- (void)toggleSectionState:(NSInteger)section
+{
+    SectionState state = [self sectionState:section];
+    
+    if (state == SectionStateCollapsed) {
+        [self attemptToExpandSection:section];
+    } else {
+        [self attemptToCollapseSection:section];
+    }
+}
+
 - (void)setSectionSpacing:(CGFloat)spacing
 {
     self.tableView.sectionFooterHeight = spacing;
@@ -149,19 +160,6 @@ UITableViewDelegate
         [indexPaths addObject:indexPath];
     }
     return indexPaths;
-}
-
-- (void)sectionHeaderTouchUpInside:(id)sender
-{
-    UIButton *btn = (UIButton *)sender;
-    NSInteger section = btn.tag;
-    SectionState state = [self sectionState:section];
-    
-    if (state == SectionStateCollapsed) {
-        [self attemptToExpandSection:section];
-    } else {
-        [self attemptToCollapseSection:section];
-    }
 }
 
 - (void)attemptToExpandSection:(NSInteger)section
@@ -341,16 +339,6 @@ UITableViewDelegate
     if ([self.dataSource respondsToSelector:@selector(expandableTableView:viewForHeaderInSection:)]) {
         headerView = [self.dataSource expandableTableView:self viewForHeaderInSection:section];
     }
-    
-    // Add invisible button
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.translatesAutoresizingMaskIntoConstraints = NO;
-    btn.tag = section;
-    [btn addTarget:self action:@selector(sectionHeaderTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-    [headerView.contentView addSubview:btn];
-    
-    [headerView.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[btn]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btn)]];
-    [headerView.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[btn]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btn)]];
     
     return headerView;
 }

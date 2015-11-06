@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -16,14 +16,17 @@
                 <subviews>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5fU-NY-UPb">
                         <rect key="frame" x="235" y="15" width="20" height="20"/>
+                        <animations/>
                         <color key="color" red="0.99607843139999996" green="0.25882352939999997" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                     </activityIndicatorView>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstItem="5fU-NY-UPb" firstAttribute="centerY" secondItem="G2A-TL-aGT" secondAttribute="centerY" id="9xi-mU-Bnb"/>
                     <constraint firstItem="5fU-NY-UPb" firstAttribute="centerX" secondItem="G2A-TL-aGT" secondAttribute="centerX" id="HqL-SP-mq6"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="activityIndicatorView" destination="5fU-NY-UPb" id="vLi-my-AKp"/>
             </connections>

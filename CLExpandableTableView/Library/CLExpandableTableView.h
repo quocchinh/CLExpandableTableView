@@ -64,6 +64,16 @@
 @property (nonatomic,strong) UITableView *tableView;
 
 - (void)collapseAndExpandSection:(NSInteger)section;
+
+
+/*
+ If section is collapsed, attempt to expand the section, subject to delegate's willExpandSection permissions
+ If section is expanded, collapse it
+ */
+- (void)toggleSectionState:(NSInteger)section;
+
+
+
 - (void)setSectionSpacing:(CGFloat)spacing;
 
 @end
