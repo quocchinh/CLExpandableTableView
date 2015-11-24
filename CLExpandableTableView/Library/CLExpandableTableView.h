@@ -72,7 +72,7 @@
  */
 - (void)toggleSectionState:(NSInteger)section;
 
-
+- (void)reloadData;
 
 - (void)setSectionSpacing:(CGFloat)spacing;
 

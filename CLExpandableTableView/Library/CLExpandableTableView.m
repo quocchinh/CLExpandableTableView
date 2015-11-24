@@ -129,6 +129,11 @@ UITableViewDelegate
     }
 }
 
+- (void)reloadData
+{
+    [self.tableView reloadData];
+}
+
 - (void)setSectionSpacing:(CGFloat)spacing
 {
     self.tableView.sectionFooterHeight = spacing;
