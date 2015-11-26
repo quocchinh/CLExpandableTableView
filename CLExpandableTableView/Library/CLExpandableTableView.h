@@ -55,7 +55,6 @@
 
 
                                           
-                                          
 @interface CLExpandableTableView : UIView
 
 @property (nonatomic,weak) IBOutlet id<CLExpandableTableViewDataSource> dataSource;
@@ -64,7 +63,7 @@
 @property (nonatomic,strong) UITableView *tableView;
 
 - (void)collapseAndExpandSection:(NSInteger)section;
-
+- (void)clearAllSectionState;
 
 /*
  If section is collapsed, attempt to expand the section, subject to delegate's willExpandSection permissions

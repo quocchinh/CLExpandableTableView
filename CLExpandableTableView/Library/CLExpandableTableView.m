@@ -93,7 +93,7 @@ UITableViewDelegate
 
 - (void)setInitialSectionState
 {
-    self.sectionStateDict = [NSMutableDictionary new];
+    [self clearAllSectionState];
 }
 
 
@@ -116,6 +116,11 @@ UITableViewDelegate
 {
     [self collapseSection:section];
     [self attemptToExpandSection:section];
+}
+
+- (void)clearAllSectionState
+{
+    self.sectionStateDict = [NSMutableDictionary new];
 }
 
 - (void)toggleSectionState:(NSInteger)section
